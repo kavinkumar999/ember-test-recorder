@@ -140,6 +140,8 @@
   border-radius: 8px;
   overflow: hidden;
   margin: 0 24px;
+  overflow-y: auto;
+  max-height: 60%;
 }
 
 .tests-header {

@@ -7,6 +7,10 @@ export default class TestRecorderSidebarComponent extends Component {
   @service testCaseGenerator;
   @tracked isRecording = false;
 
+  get testCases() {
+    return this.testCaseGenerator.testCaseCode;
+  }
+
   @action
   toggleRecording() {
     this.isRecording = !this.isRecording;
@@ -20,8 +24,8 @@ export default class TestRecorderSidebarComponent extends Component {
 
   @action
   copyTests() {
-    if (this.testCaseGenerator.testCaseCode.length > 0) {
-      navigator.clipboard.writeText(this.testCaseGenerator.testCaseCode.join('\n'));
+    if (this.testCases.length > 0) {
+      navigator.clipboard.writeText(this.testCases.join('\n'));
       alert('Tests copied to clipboard!');
     }
   }
@@ -32,10 +36,10 @@ export default class TestRecorderSidebarComponent extends Component {
   }
 
   startTestRecording() {
-    console.log('Test recording started');
+    this.testCaseGenerator.startRecording();
   }
 
   stopTestRecording() {
-    console.log('Test recording stopped');
+    this.testCaseGenerator.stopRecording();
   }
 }

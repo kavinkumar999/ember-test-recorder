@@ -18,12 +18,14 @@ export default class TestCaseGeneratorService extends Service {
       id: `test-${this.testcasesData.length + 1}`
     });
 
-    this.testCode.push(this.getStepCode(stepData));
+    let code = this.getStepCode(stepData);
+
+    this.testCaseCode = [...this.testCaseCode, code];
   }
 
   clear() {
     this.testcasesData = [];
-    this.testCode = [];
+    this.testCaseCode = [];
   }
 
   startRecording() {

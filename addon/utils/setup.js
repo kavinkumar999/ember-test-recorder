@@ -1,5 +1,3 @@
-import { getOwner } from '@ember/application';
-
 const TEST_ACTIONS = {
   CLICK: 'click',
   INPUT: 'input',
@@ -9,8 +7,8 @@ const TEST_ACTIONS = {
   SUBMIT: 'submit'
 };
 
-export function setupAllEvents(context) {
-  const testCaseGenerator = getOwner(context).lookup('service:test-case-generator');
+export function setupAllEvents(context, owner) {
+  const testCaseGenerator = owner.lookup('service:test-case-generator');
 
   setupClickEvents(testCaseGenerator);
   setupInputEvents(testCaseGenerator);
@@ -122,4 +120,3 @@ function generateSelector(element) {
 
   return element.tagName.toLowerCase();
 }
-
