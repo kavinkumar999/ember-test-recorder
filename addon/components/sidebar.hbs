@@ -42,15 +42,15 @@
         <h3 class="tests-header-title">Generated Tests</h3>
       </div>
       <div class="tests-content">
-        {{#if (eq this.generatedTests.length 0)}}
+        {{#if (eq this.testCaseGenerator.testCaseCode.length 0)}}
           <div class="empty-state">
-            <svg class="button-icon" style="width: 48px; height: 48px; margin-bottom: 8px; opacity: 0.5;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg class="button-icon empty-state-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
             </svg>
             <p>No tests generated yet</p>
           </div>
         {{else}}
-          {{#each this.generatedTests as |test|}}
+          {{#each this.testCaseGenerator.testCaseCode as |test|}}
             <pre class="test-item">{{test}}</pre>
           {{/each}}
         {{/if}}

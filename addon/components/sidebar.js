@@ -1,10 +1,11 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
+import { inject as service } from '@ember/service';
 
 export default class TestRecorderSidebarComponent extends Component {
+  @service testCaseGenerator;
   @tracked isRecording = false;
-  @tracked generatedTests = [];
 
   @action
   toggleRecording() {
@@ -19,15 +20,15 @@ export default class TestRecorderSidebarComponent extends Component {
 
   @action
   copyTests() {
-    if (this.generatedTests.length > 0) {
-      navigator.clipboard.writeText(this.generatedTests.join('\n'));
+    if (this.testCaseGenerator.testCaseCode.length > 0) {
+      navigator.clipboard.writeText(this.testCaseGenerator.testCaseCode.join('\n'));
       alert('Tests copied to clipboard!');
     }
   }
 
   @action
   clearTests() {
-    this.generatedTests = [];
+    this.testCaseGenerator.clear();
   }
 
   startTestRecording() {
