@@ -19,10 +19,21 @@ export function setupAllEvents(context, owner) {
 function setupClickEvents(testCaseGenerator) {
   document.body.addEventListener(TEST_ACTIONS.CLICK, (event) => {
     const element = event.target;
+    let notAllowedClasses = ['test-action-button', 'recorder-button', 'close-button'];
+    let closestElementList = ['.test-recorder-sidebar'];
+    let classAllowedCondition = notAllowedClasses.some((className) => element.classList.contains(className));
+    let closestElementAllowedCondition = closestElementList.some((className) => {
+      if (element.closest(className)) {
+        return true;
+      }
+    });
+
     if (
       !testCaseGenerator.isRecording ||
       !element ||
-      !element.matches('button, a, [role="button"], input[type="submit"]')
+      element.matches('input[type="text"]', 'textarea') ||
+      classAllowedCondition ||
+      closestElementAllowedCondition
     ) {
       return;
     }
@@ -100,11 +111,11 @@ function setupFormEvents(testCaseGenerator) {
 }
 
 function generateSelector(element) {
+  const testSelector = Array.from(element.attributes).find((attr) => attr.name.startsWith('data-test-'));
+
   if (element.id) {
     return `#${element.id}`;
   }
-
-  const testSelector = Array.from(element.attributes).find((attr) => attr.name.startsWith('data-test-'));
 
   if (testSelector) {
     return `[${testSelector.name}]`;
