@@ -30,6 +30,12 @@ export default class TestCaseGeneratorService extends Service {
 
   startRecording() {
     this.isRecording = true;
+    let currentUrl = window.location.hash;
+    let selector = currentUrl.slice(1);
+    this.addStep({
+      action: 'visit',
+      selector: selector
+    });
   }
 
   stopRecording() {
@@ -40,6 +46,8 @@ export default class TestCaseGeneratorService extends Service {
     switch (step.action) {
       case 'click':
         return `await click('${step.selector}');`;
+      case 'visit':
+        return `await visit('${step.selector}');`;
       case 'typeIn':
         return `await typeIn('${step.selector}', '${step.value}');`;
       case 'fillIn':
