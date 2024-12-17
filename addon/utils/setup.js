@@ -54,7 +54,6 @@ function setupInputEvents(testCaseGenerator) {
     });
   });
 
-  // Handle blur events for input validation
   document.body.addEventListener(TEST_ACTIONS.BLUR, (event) => {
     const element = event.target;
     if (!testCaseGenerator.isRecording || !element || !element.matches('input, textarea, select')) {

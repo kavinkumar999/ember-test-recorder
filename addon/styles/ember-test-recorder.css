@@ -6,9 +6,14 @@
 /* Button Component */
 .recorder-button {
   position: fixed;
-  z-index: 50;
+  z-index: 9999;
   cursor: move;
   user-select: none;
+  transition: transform 0.1s ease;
+}
+
+.recorder-button:active {
+  cursor: grabbing;
 }
 
 .recorder-svg {

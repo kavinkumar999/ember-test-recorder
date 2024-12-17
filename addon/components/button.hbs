@@ -1,6 +1,8 @@
 <div
-  class="recorder-button" 
+  class="recorder-button"
   {{on "click" this.handleClick}}
+  {{on "mousedown" this.startDragging}}
+  style={{html-safe (concat "transform: " this.transformStyle)}}
 >
   <svg 
     viewBox="0 0 60 60" 
