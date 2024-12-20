@@ -1,6 +1,6 @@
 import Component from '@glimmer/component';
 import { getOwner } from '@ember/application';
-import { setupAllEvents } from '../utils/setup';
+import TestRecorderInitializer from '../utils/index';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 
@@ -9,7 +9,8 @@ export default class RecorderComponent extends Component {
   constructor() {
     super(...arguments);
     const owner = getOwner(this);
-    setupAllEvents(this, owner);
+    this.testRecorderInitializer = new TestRecorderInitializer(this, owner);
+    this.testRecorderInitializer.initialize();
   }
 
   @action

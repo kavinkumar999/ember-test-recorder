@@ -1,3 +1,5 @@
+import EventAdapter from './event-handlers';
+
 const TEST_ACTIONS = {
   CLICK: 'click',
   INPUT: 'input',
@@ -9,124 +11,23 @@ const TEST_ACTIONS = {
 
 export function setupAllEvents(context, owner) {
   const testCaseGenerator = owner.lookup('service:test-case-generator');
+  const eventAdapter = new EventAdapter(testCaseGenerator);
 
-  setupClickEvents(testCaseGenerator);
-  setupInputEvents(testCaseGenerator);
-  setupFocusEvents(testCaseGenerator);
-  setupFormEvents(testCaseGenerator);
-}
+  const eventHandlers = {
+    [TEST_ACTIONS.CLICK]: (event) => eventAdapter.handleClick(event),
+    [TEST_ACTIONS.INPUT]: (event) => eventAdapter.handleInput(event),
+    [TEST_ACTIONS.FOCUS]: (event) => eventAdapter.handleFocus(event),
+    [TEST_ACTIONS.BLUR]: (event) => eventAdapter.handleBlur(event),
+    [TEST_ACTIONS.SUBMIT]: (event) => eventAdapter.handleSubmit(event)
+  };
 
-function setupClickEvents(testCaseGenerator) {
-  document.body.addEventListener(TEST_ACTIONS.CLICK, (event) => {
-    const element = event.target;
-    let notAllowedClasses = ['test-action-button', 'recorder-button', 'close-button'];
-    let closestElementList = ['.test-recorder-sidebar'];
-    let classAllowedCondition = notAllowedClasses.some((className) => element.classList.contains(className));
-    let closestElementAllowedCondition = closestElementList.some((className) => {
-      if (element.closest(className)) {
-        return true;
-      }
-    });
-
-    if (
-      !testCaseGenerator.isRecording ||
-      !element ||
-      element.type === 'text' ||
-      element.type === 'textarea' ||
-      element.matches('input[type="text"]', 'textarea') ||
-      classAllowedCondition ||
-      closestElementAllowedCondition
-    ) {
-      return;
-    }
-
-    const selector = generateSelector(element);
-    testCaseGenerator.addStep({
-      action: 'click',
-      selector,
-      element: element.outerHTML
-    });
-  });
-}
-
-function setupInputEvents(testCaseGenerator) {
-  document.body.addEventListener(TEST_ACTIONS.INPUT, (event) => {
-    const element = event.target;
-    if (!testCaseGenerator.isRecording || !element || !element.matches('input, textarea, select')) {
-      return;
-    }
-    const selector = generateSelector(element);
-    const action = 'fillIn';
-
-    testCaseGenerator.addStep({
-      action,
-      selector,
-      value: element.value,
-      element: element.outerHTML
-    });
+  Object.entries(eventHandlers).forEach(([eventType, handler]) => {
+    document.body.addEventListener(eventType, handler);
   });
 
-  document.body.addEventListener(TEST_ACTIONS.BLUR, (event) => {
-    const element = event.target;
-    if (!testCaseGenerator.isRecording || !element || !element.matches('input, textarea, select')) {
-      return;
-    }
-
-    testCaseGenerator.addStep({
-      action: 'blur',
-      selector: generateSelector(element),
-      element: element.outerHTML
+  return () => {
+    Object.entries(eventHandlers).forEach(([eventType, handler]) => {
+      document.body.removeEventListener(eventType, handler);
     });
-  });
-}
-
-function setupFocusEvents(testCaseGenerator) {
-  document.body.addEventListener(TEST_ACTIONS.FOCUS, (event) => {
-    const element = event.target;
-    if (!testCaseGenerator.isRecording || !element || !element.matches('input, textarea, select')) {
-      return;
-    }
-
-    testCaseGenerator.addStep({
-      action: 'focus',
-      selector: generateSelector(element),
-      element: element.outerHTML
-    });
-  });
-}
-
-function setupFormEvents(testCaseGenerator) {
-  document.body.addEventListener(TEST_ACTIONS.SUBMIT, (event) => {
-    const form = event.target;
-    if (!testCaseGenerator.isRecording || !form || !form.matches('form')) {
-      return;
-    }
-
-    testCaseGenerator.addStep({
-      action: 'triggerEvent',
-      selector: generateSelector(form),
-      eventName: 'submit',
-      element: form.outerHTML
-    });
-  });
-}
-
-function generateSelector(element) {
-  const testSelector = Array.from(element.attributes).find((attr) => attr.name.startsWith('data-test-'));
-  if (testSelector) {
-    return `[${testSelector.name}="${testSelector.value}"]`;
-  }
-
-  if (element.id) {
-    return `#${element.id}`;
-  }
-
-  if (element.className) {
-    const classes = element.className.split(' ').filter(Boolean);
-    if (classes.length) {
-      return `.${classes[0]}`;
-    }
-  }
-
-  return element.tagName.toLowerCase();
+  };
 }

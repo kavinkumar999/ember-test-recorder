@@ -22,16 +22,16 @@ export default class TestCaseGeneratorService extends Service {
     let data = {
       id: `${stepData.action}-${stepData.selector}`,
       code
-    }
+    };
     if (stepData.action === 'fillIn' || stepData.action === 'typeIn') {
       let isKeyExists = this.testCaseCode.find((testCase) => testCase.id === data.id);
       if (isKeyExists) {
-        this.testCaseCode =this.testCaseCode.map((testCase) => {
+        this.testCaseCode = this.testCaseCode.map((testCase) => {
           if (testCase.id === data.id) {
             return {
               ...testCase,
               code: data.code
-            }
+            };
           }
           return testCase;
         });
@@ -59,6 +59,48 @@ export default class TestCaseGeneratorService extends Service {
 
   stopRecording() {
     this.isRecording = false;
+  }
+
+  addAssertion(assertionData) {
+    const code = this.getAssertionCode(assertionData);
+    this.testCaseCode = [
+      ...this.testCaseCode,
+      {
+        id: `assertion-${this.testCaseCode.length}`,
+        code
+      }
+    ];
+  }
+
+  getAssertionCode(assertion) {
+    switch (assertion.type) {
+      case 'equal':
+        return `assert.equal(${assertion.actual}, ${assertion.expected}, '${assertion.message}');`;
+      case 'dom':
+        return `assert.dom('${assertion.selector}')${this.getDomAssertionChain(assertion)};`;
+      case 'ok':
+        return `assert.ok(${assertion.value}, '${assertion.message}');`;
+      default:
+        return '';
+    }
+  }
+
+  getDomAssertionChain(assertion) {
+    const { check, value, message } = assertion;
+    switch (check) {
+      case 'exists':
+        return `.exists('${message}')`;
+      case 'hasText':
+        return `.hasText('${value}', '${message}')`;
+      case 'hasValue':
+        return `.hasValue('${value}', '${message}')`;
+      case 'isChecked':
+        return `.isChecked('${message}')`;
+      case 'hasClass':
+        return `.hasClass('${value}', '${message}')`;
+      default:
+        return '';
+    }
   }
 
   getStepCode(step) {
