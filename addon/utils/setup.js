@@ -6,7 +6,8 @@ const TEST_ACTIONS = {
   FOCUS: 'focus',
   BLUR: 'blur',
   KEYUP: 'keyup',
-  SUBMIT: 'submit'
+  SUBMIT: 'submit',
+  POPSTATE: 'popstate'
 };
 
 export function setupAllEvents(context, owner) {
@@ -18,16 +19,25 @@ export function setupAllEvents(context, owner) {
     [TEST_ACTIONS.INPUT]: (event) => eventAdapter.handleInput(event),
     [TEST_ACTIONS.FOCUS]: (event) => eventAdapter.handleFocus(event),
     [TEST_ACTIONS.BLUR]: (event) => eventAdapter.handleBlur(event),
-    [TEST_ACTIONS.SUBMIT]: (event) => eventAdapter.handleSubmit(event)
+    [TEST_ACTIONS.SUBMIT]: (event) => eventAdapter.handleSubmit(event),
+    [TEST_ACTIONS.POPSTATE]: (event) => eventAdapter.handlePopState(event)
   };
 
   Object.entries(eventHandlers).forEach(([eventType, handler]) => {
-    document.body.addEventListener(eventType, handler);
+    if (eventType === TEST_ACTIONS.POPSTATE) {
+      window.addEventListener(eventType, handler);
+    } else {
+      document.body.addEventListener(eventType, handler);
+    }
   });
 
   return () => {
     Object.entries(eventHandlers).forEach(([eventType, handler]) => {
-      document.body.removeEventListener(eventType, handler);
+      if (eventType === TEST_ACTIONS.POPSTATE) {
+        window.removeEventListener(eventType, handler);
+      } else {
+        document.body.removeEventListener(eventType, handler);
+      }
     });
   };
 }

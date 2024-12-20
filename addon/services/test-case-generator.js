@@ -49,11 +49,10 @@ export default class TestCaseGeneratorService extends Service {
 
   startRecording() {
     this.isRecording = true;
-    let currentUrl = window.location.hash;
-    let selector = currentUrl.slice(1);
+    let currentUrl = window.location.hash.slice(1);
     this.addStep({
       action: 'visit',
-      selector: selector
+      selector: currentUrl
     });
   }
 

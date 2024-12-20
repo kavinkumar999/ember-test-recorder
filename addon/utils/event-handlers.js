@@ -5,20 +5,14 @@ export default class EventAdapter {
 
   commonHandler(event, options = {}) {
     const element = event.target;
-    const { allowedElements = [], notAllowedElements = [], closestElementList = [] } = options;
-    if (!element) {
+    const { allowedElements = [], notAllowedElements = [] } = options;
+    if (!element || !this.testCaseGenerator.isRecording) {
       return false;
     }
     if (notAllowedElements.some((_notAllowedElement) => element.type === _notAllowedElement)) {
       return false;
     }
-    if (closestElementList.some((selector) => element.closest(selector))) {
-      return false;
-    }
     if (allowedElements.length && !element.matches(allowedElements.join(', '))) {
-      return false;
-    }
-    if (!this.testCaseGenerator.isRecording) {
       return false;
     }
     if (!this.getSelector(element)) {
@@ -104,11 +98,28 @@ export default class EventAdapter {
     });
   }
 
+  handlePopState() {
+    if (!this.testCaseGenerator.isRecording) {
+      return;
+    }
+    const currentPath = window.location.hash.slice(1);
+
+    this.testCaseGenerator.addStep({
+      action: 'visit',
+      selector: currentPath
+    });
+  }
+
   getSelector(element) {
     const testSelector = Array.from(element.attributes).find((attr) => attr.name.startsWith('data-test-'));
 
     if (testSelector) {
       return `[${testSelector.name}="${testSelector.value}"]`;
+    }
+
+    const closestElement = element.closest('[data-test-selector]');
+    if (closestElement) {
+      return `[data-test-selector="${closestElement.getAttribute('data-test-selector')}"]`;
     }
 
     return false;
