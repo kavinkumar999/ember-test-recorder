@@ -5,6 +5,8 @@ export default class TestCaseGeneratorService extends Service {
   @tracked testcasesData = [];
   @tracked testCaseCode = [];
   @tracked isRecording = false;
+  @tracked assertionMode = false;
+  @tracked assertionType = 'ok';
 
   constructor() {
     super(...arguments);
@@ -59,16 +61,27 @@ export default class TestCaseGeneratorService extends Service {
   stopRecording() {
     this.isRecording = false;
   }
+  setAssertionMode(mode) {
+    this.assertionMode = mode;
+  }
 
-  addAssertion(assertionData) {
-    const code = this.getAssertionCode(assertionData);
-    this.testCaseCode = [
-      ...this.testCaseCode,
-      {
-        id: `assertion-${this.testCaseCode.length}`,
-        code
-      }
-    ];
+  setAssertionType(type) {
+    this.assertionType = type;
+  }
+
+  addAssertion(type, selector, element) {
+    let assertion = {
+      check: 'hasText',
+      type,
+      selector,
+      value: element.textContent,
+      message: type === 'dom' ? `Element has text "${element.textContent}"` : ''
+    };
+    let data = {
+      id: `assertion-${type}-${selector}`,
+      code: this.getAssertionCode(assertion)
+    };
+    this.testCaseCode = [...this.testCaseCode, data];
   }
 
   getAssertionCode(assertion) {
@@ -78,14 +91,14 @@ export default class TestCaseGeneratorService extends Service {
       case 'dom':
         return `assert.dom('${assertion.selector}')${this.getDomAssertionChain(assertion)};`;
       case 'ok':
-        return `assert.ok(${assertion.value}, '${assertion.message}');`;
+        return `assert.ok(${assertion.selector});`;
       default:
         return '';
     }
   }
 
   getDomAssertionChain(assertion) {
-    const { check, value, message } = assertion;
+    const { check = 'hasText', value, message = '' } = assertion;
     switch (check) {
       case 'exists':
         return `.exists('${message}')`;

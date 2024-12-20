@@ -1,7 +1,7 @@
 {{#if @isOpen}}
   <div class="test-recorder-sidebar">
     <div class="sidebar-header">
-      <h2 class="sidebar-title">Test Recorder</h2>
+      <h2 class="sidebar-title {{if this.isRecording 'recording'}}">Test Recorder</h2>
       <button type="button" class="close-button" {{on "click" @onClose}}>×</button>
     </div>
 
@@ -22,16 +22,57 @@
       </button>
     </div>
 
+    <div class="assertion-mode-container">
+      <div class="assertion-mode-header">
+        <div class="assertion-mode-toggle">
+          <span class="toggle-label">Assertion Mode</span>
+          <label class="toggle-switch">
+            <input 
+              type="checkbox" 
+              checked={{this.assertionMode}}
+              {{on "change" this.toggleAssertionMode}}
+            >
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+      
+      {{#if this.assertionMode}}
+        <div class="assertion-options">
+          <label class="radio-option">
+            <input 
+              type="radio" 
+              name="assertionType" 
+              value="ok"
+              checked={{eq this.assertionType "ok"}}
+              {{on "change" (fn this.setAssertionType "ok")}}
+            >
+            <span class="radio-label">assert.ok</span>
+          </label>
+          <label class="radio-option">
+            <input 
+              type="radio" 
+              name="assertionType" 
+              value="dom"
+              checked={{eq this.assertionType "dom"}}
+              {{on "change" (fn this.setAssertionType "dom")}}
+            >
+            <span class="radio-label">assert.dom</span>
+          </label>
+        </div>
+      {{/if}}
+    </div>
+
     <div class="tests-container">
       <div class="tests-header">
         <h3 class="tests-header-title">Generated Tests</h3>
         <div class="tests-header-actions">
-          <button type="button" class="icon-button copy-button" title="Copy Tests" {{on "click" this.copyTests}}>
+          <button type="button" class="test-icon-button copy-button" title="Copy Tests" {{on "click" this.copyTests}}>
             <svg class="button-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
             </svg>
           </button>
-          <button type="button" class="icon-button clear-button" title="Clear Tests" {{on "click" this.clearTests}}>
+          <button type="button" class="test-icon-button clear-button" title="Clear Tests" {{on "click" this.clearTests}}>
             <svg class="button-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
             </svg>

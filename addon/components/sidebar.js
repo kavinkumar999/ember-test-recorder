@@ -6,6 +6,8 @@ import { inject as service } from '@ember/service';
 export default class TestRecorderSidebarComponent extends Component {
   @service testCaseGenerator;
   @tracked isRecording = false;
+  @tracked assertionMode = false;
+  @tracked assertionType = 'ok';
 
   get testCases() {
     return this.testCaseGenerator.testCaseCode.map((testCase) => testCase.code);
@@ -41,5 +43,17 @@ export default class TestRecorderSidebarComponent extends Component {
 
   stopTestRecording() {
     this.testCaseGenerator.stopRecording();
+  }
+
+  @action
+  toggleAssertionMode(event) {
+    this.assertionMode = event.target.checked;
+    this.testCaseGenerator.setAssertionMode(this.assertionMode);
+  }
+
+  @action
+  setAssertionType(type) {
+    this.assertionType = type;
+    this.testCaseGenerator.setAssertionType(type);
   }
 }

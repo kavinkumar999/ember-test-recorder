@@ -29,7 +29,11 @@ export default class EventAdapter {
     const element = event.target;
     const selector = this.getSelector(element);
 
-    this.testCaseGenerator.addStep({
+    if (this.testCaseGenerator.assertionMode) {
+      return this.testCaseGenerator.addAssertion(this.testCaseGenerator.assertionType, selector, element);
+    }
+
+    return this.testCaseGenerator.addStep({
       action: 'click',
       selector,
       element: element.outerHTML
@@ -99,7 +103,7 @@ export default class EventAdapter {
   }
 
   handlePopState() {
-    if (!this.testCaseGenerator.isRecording) {
+    if (!this.testCaseGenerator.isRecording || this.testCaseGenerator.assertionMode) {
       return;
     }
 
