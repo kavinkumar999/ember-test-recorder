@@ -119,14 +119,6 @@
   transition: all 0.2s ease;
 }
 
-.copy-button {
-  background-color: #3b82f6;
-}
-
-.copy-button:hover {
-  background-color: #2563eb;
-}
-
 .clear-button {
   background-color: #6b7280;
 }
@@ -146,9 +138,12 @@
 }
 
 .tests-header {
-  padding: 8px 16px;
-  background-color: #f9fafb;
-  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
 .tests-header-title {
@@ -185,7 +180,43 @@
 }
 
 .button-icon {
-  width: 16px;
-  height: 16px;
-  margin-right: 8px;
-} 
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.tests-header-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.icon-button {
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  border-radius: 0.375rem;
+  color: #6b7280;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-button:hover {
+  background-color: #f3f4f6;
+  color: #374151;
+}
+
+.icon-button.copy-button {
+  color: #3b82f6;
+}
+
+.icon-button.copy-button:hover {
+  background-color: #eff6ff;
+  color: #2563eb;
+}
+
+.icon-button.clear-button:hover {
+  background-color: #fee2e2;
+  color: #dc2626;
+}

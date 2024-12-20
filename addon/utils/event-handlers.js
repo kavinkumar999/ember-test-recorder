@@ -102,12 +102,15 @@ export default class EventAdapter {
     if (!this.testCaseGenerator.isRecording) {
       return;
     }
-    const currentPath = window.location.hash.slice(1);
 
-    this.testCaseGenerator.addStep({
-      action: 'visit',
-      selector: currentPath
-    });
+    setTimeout(() => {
+      const currentPath = window.location.hash.slice(1);
+
+      this.testCaseGenerator.addStep({
+        action: 'visit',
+        selector: currentPath
+      });
+    }, 0);
   }
 
   getSelector(element) {
