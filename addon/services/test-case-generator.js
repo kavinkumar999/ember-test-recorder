@@ -19,8 +19,27 @@ export default class TestCaseGeneratorService extends Service {
     });
 
     let code = this.getStepCode(stepData);
+    let data = {
+      id: `${stepData.action}-${stepData.selector}`,
+      code
+    }
+    if (stepData.action === 'fillIn' || stepData.action === 'typeIn') {
+      let isKeyExists = this.testCaseCode.find((testCase) => testCase.id === data.id);
+      if (isKeyExists) {
+        this.testCaseCode =this.testCaseCode.map((testCase) => {
+          if (testCase.id === data.id) {
+            return {
+              ...testCase,
+              code: data.code
+            }
+          }
+          return testCase;
+        });
+        return;
+      }
+    }
 
-    this.testCaseCode = [...this.testCaseCode, code];
+    this.testCaseCode = [...this.testCaseCode, data];
   }
 
   clear() {

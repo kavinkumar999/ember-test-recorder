@@ -31,6 +31,8 @@ function setupClickEvents(testCaseGenerator) {
     if (
       !testCaseGenerator.isRecording ||
       !element ||
+      element.type === 'text' ||
+      element.type === 'textarea' ||
       element.matches('input[type="text"]', 'textarea') ||
       classAllowedCondition ||
       closestElementAllowedCondition
@@ -53,9 +55,8 @@ function setupInputEvents(testCaseGenerator) {
     if (!testCaseGenerator.isRecording || !element || !element.matches('input, textarea, select')) {
       return;
     }
-
     const selector = generateSelector(element);
-    const action = element.type === 'text' || element.type === 'textarea' ? 'typeIn' : 'fillIn';
+    const action = 'fillIn';
 
     testCaseGenerator.addStep({
       action,
@@ -112,13 +113,12 @@ function setupFormEvents(testCaseGenerator) {
 
 function generateSelector(element) {
   const testSelector = Array.from(element.attributes).find((attr) => attr.name.startsWith('data-test-'));
+  if (testSelector) {
+    return `[${testSelector.name}="${testSelector.value}"]`;
+  }
 
   if (element.id) {
     return `#${element.id}`;
-  }
-
-  if (testSelector) {
-    return `[${testSelector.name}]`;
   }
 
   if (element.className) {

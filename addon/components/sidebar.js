@@ -8,7 +8,7 @@ export default class TestRecorderSidebarComponent extends Component {
   @tracked isRecording = false;
 
   get testCases() {
-    return this.testCaseGenerator.testCaseCode;
+    return this.testCaseGenerator.testCaseCode.map((testCase) => testCase.code);
   }
 
   @action
