@@ -2,7 +2,7 @@ import Service from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 
 export default class TestCaseGeneratorService extends Service {
-  @tracked testcasesData = [];
+  @tracked testGeneratedStraceLogs = [];
   @tracked testCaseCode = [];
   @tracked isRecording = false;
   @tracked assertionMode = false;
@@ -14,10 +14,10 @@ export default class TestCaseGeneratorService extends Service {
   }
 
   addStep(stepData) {
-    this.testcasesData.push({
+    this.testGeneratedStraceLogs.push({
       ...stepData,
       timestamp: new Date().getTime(),
-      id: `test-${this.testcasesData.length + 1}`
+      id: `test-${this.testGeneratedStraceLogs.length + 1}`
     });
 
     let code = this.getStepCode(stepData);
@@ -45,7 +45,7 @@ export default class TestCaseGeneratorService extends Service {
   }
 
   clear() {
-    this.testcasesData = [];
+    this.testGeneratedStraceLogs = [];
     this.testCaseCode = [];
   }
 
@@ -134,5 +134,10 @@ export default class TestCaseGeneratorService extends Service {
       default:
         return '';
     }
+  }
+
+  removeTestCase(removeIndex) {
+    let _testCaseCode = this.testCaseCode.filter((_, _index) => _index !== removeIndex);
+    this.testCaseCode = [..._testCaseCode];
   }
 }

@@ -89,7 +89,19 @@
           </div>
         {{else}}
           {{#each this.testCases as |test|}}
-            <pre class="test-item">{{test}}</pre>
+            <div class="test-item-container">
+              <pre class="test-item">{{test.code}}</pre>
+              <button 
+                type="button" 
+                class="test-icon-button remove-button" 
+                title="Remove Test"
+                {{on "click" (fn this.removeTest test.index)}}
+              >
+                <svg class="button-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" />
+                </svg>
+              </button>
+            </div>
           {{/each}}
         {{/if}}
       </div>

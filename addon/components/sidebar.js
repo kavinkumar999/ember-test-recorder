@@ -10,7 +10,10 @@ export default class TestRecorderSidebarComponent extends Component {
   @tracked assertionType = 'ok';
 
   get testCases() {
-    return this.testCaseGenerator.testCaseCode.map((testCase) => testCase.code);
+    return this.testCaseGenerator.testCaseCode.map((testCase, index) => ({
+      code: testCase.code,
+      index
+    }));
   }
 
   @action
@@ -27,7 +30,7 @@ export default class TestRecorderSidebarComponent extends Component {
   @action
   copyTests() {
     if (this.testCases.length > 0) {
-      navigator.clipboard.writeText(this.testCases.join('\n'));
+      navigator.clipboard.writeText(this.testCases.map(testCase => testCase.code).join('\n'));
       alert('Tests copied to clipboard!');
     }
   }
@@ -55,5 +58,10 @@ export default class TestRecorderSidebarComponent extends Component {
   setAssertionType(type) {
     this.assertionType = type;
     this.testCaseGenerator.setAssertionType(type);
+  }
+
+  @action
+  removeTest(index) {
+    this.testCaseGenerator.removeTestCase(index);
   }
 }
