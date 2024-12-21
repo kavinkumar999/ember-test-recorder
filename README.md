@@ -50,7 +50,6 @@ test('user can complete login flow', async function(assert) {
   await fillIn('[data-test-password]', 'password123');
   await click('[data-test-submit]');
   
-  assert.strictEqual(currentURL(), '/dashboard');
   assert.dom('[data-test-welcome]').hasText('Welcome back!');
 });
 ```

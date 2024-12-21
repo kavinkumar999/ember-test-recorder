@@ -70,7 +70,12 @@
     "stylelint": "^15.11.0",
     "stylelint-config-standard": "^34.0.0",
     "stylelint-prettier": "^4.1.0",
-    "webpack": "^5.95.0"
+    "webpack": "^5.95.0",
+    "broccoli-funnel": "^3.0.8",
+    "broccoli-merge-trees": "^4.2.0",
+    "broccoli-postcss": "^6.0.1",
+    "postcss": "^8.4.21",
+    "postcss-clean": "^1.2.2"
   },
   "peerDependencies": {
     "ember-source": ">= 4.0.0"
@@ -80,12 +85,6 @@
   },
   "ember": {
     "edition": "octane"
-  },
-  "ember-addon": {
-    "configPath": "config/ember-try.js",
-    "styles": [
-      "addon/styles/ember-test-recorder.css"
-    ]
   },
   "exports": {
     ".": "./addon/components.js",
