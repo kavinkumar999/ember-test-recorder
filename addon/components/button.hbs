@@ -1,7 +1,8 @@
-<div
+<button
+  type="button"
   class="recorder-button"
   {{on "click" this.handleClick}}
-  {{on "mousedown" this.startDragging}}
+  {{on "mouseup" this.startDragging}}
   style={{html-safe (concat "transform: " this.transformStyle)}}
 >
   <svg 
@@ -11,4 +12,4 @@
     <circle cx="30" cy="30" r="25" fill="#FF6B6B"/>
     <path d="M20 22 L40 30 L20 38 Z" fill="white"/>
   </svg>
-</div>
+</button>

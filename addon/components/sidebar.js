@@ -30,7 +30,7 @@ export default class TestRecorderSidebarComponent extends Component {
   @action
   copyTests() {
     if (this.testCases.length > 0) {
-      navigator.clipboard.writeText(this.testCases.map(testCase => testCase.code).join('\n'));
+      navigator.clipboard.writeText(this.testCases.map((testCase) => testCase.code).join('\n'));
       alert('Tests copied to clipboard!');
     }
   }
