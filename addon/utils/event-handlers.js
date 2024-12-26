@@ -118,17 +118,36 @@ export default class EventAdapter {
   }
 
   getSelector(element) {
-    const testSelector = Array.from(element.attributes).find((attr) => attr.name.startsWith('data-test-'));
+    const testAttribute = Array.from(element.attributes).find((attr) => attr.name.startsWith('data-test-'));
 
-    if (testSelector) {
-      return `[${testSelector.name}="${testSelector.value}"]`;
+    if (testAttribute) {
+      return `[${testAttribute.name}="${testAttribute.value}"]`;
     }
 
-    const closestElement = element.closest('[data-test-selector]');
-    if (closestElement) {
-      return `[data-test-selector="${closestElement.getAttribute('data-test-selector')}"]`;
+    const testSelectors = new Set(['selector', 'title', 'section', 'action', 'id', 'modal', 'input', 'button']);
+    let closestSelector = null;
+    let minDepth = Infinity;
+
+    for (const selectorName of testSelectors) {
+      const dataTestAttr = `data-test-${selectorName}`;
+      const matchingElement = element.closest(`[${dataTestAttr}]`);
+
+      if (matchingElement) {
+        let depth = 0;
+        let current = element;
+
+        while (current && current !== matchingElement) {
+          depth++;
+          current = current.parentElement;
+        }
+
+        if (depth < minDepth) {
+          minDepth = depth;
+          closestSelector = `[${dataTestAttr}="${matchingElement.getAttribute(dataTestAttr)}"]`;
+        }
+      }
     }
 
-    return false;
+    return closestSelector || false;
   }
 }
