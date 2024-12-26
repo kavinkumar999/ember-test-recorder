@@ -1,8 +1,9 @@
-<button
-  type="button"
+{{!-- template-lint-disable no-invalid-interactive --}}
+{{!-- template-lint-disable no-pointer-down-event-binding --}}
+<div
   class="recorder-button"
   {{on "click" this.handleClick}}
-  {{on "mouseup" this.startDragging}}
+  {{on "mousedown" this.startDragging}}
   style={{html-safe (concat "transform: " this.transformStyle)}}
 >
   <svg 
@@ -12,4 +13,4 @@
     <circle cx="30" cy="30" r="25" fill="#FF6B6B"/>
     <path d="M20 22 L40 30 L20 38 Z" fill="white"/>
   </svg>
-</button>
+</div>
