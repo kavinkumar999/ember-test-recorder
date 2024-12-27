@@ -1,1 +1,126 @@
 /* Ember supports plain CSS out of the box. More info: https://cli.emberjs.com/release/advanced-use/stylesheets/ */
+.button {
+  background-color: blue;
+}
+
+/* General Styles */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  margin: 0;
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+.test-examples {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Form Styles */
+.form-test-container {
+  padding: 20px;
+  background: white;
+  border-radius: 6px;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.submit-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.submit-button:hover {
+  background-color: #45a049;
+}
+
+/* Assertions Page Styles */
+.assertions-container {
+  padding: 20px;
+}
+
+.example-block {
+  margin-bottom: 30px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #fff;
+}
+
+.status-indicator {
+  padding: 10px;
+  border-radius: 4px;
+  margin: 10px 0;
+}
+
+.status-indicator.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.status-indicator.inactive {
+  background-color: #f44336;
+  color: white;
+}
+
+/* Success Message */
+.success-message {
+  background-color: #dff0d8;
+  color: #3c763d;
+  padding: 15px;
+  margin-top: 20px;
+  border-radius: 4px;
+  border: 1px solid #d6e9c6;
+}
+
+/* Navigation */
+.nav-links {
+  margin-bottom: 20px;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.nav-links a {
+  margin-right: 15px;
+  color: #666;
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+.nav-links a:hover {
+  background-color: #f0f0f0;
+}
+
+.nav-links a.active {
+  color: #4CAF50;
+  font-weight: 500;
+}

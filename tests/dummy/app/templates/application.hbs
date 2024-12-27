@@ -1,4 +1,14 @@
-{{outlet}}
+<div class="test-examples">
+  <h1>Test Case Recorder Examples</h1>
+  
+  <TestCaseRecorder />
 
-<h1>Hello World</h1>
-<TestCaseRecorder />
+  <nav class="nav-links">
+    <LinkTo @route="home" class="nav-link">Home</LinkTo>
+    <LinkTo @route="assertions" class="nav-link">Assertions</LinkTo>
+  </nav>
+
+  <div class="example-section">
+    {{outlet}}
+  </div>
+</div>

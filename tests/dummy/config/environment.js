@@ -5,7 +5,7 @@ module.exports = function (environment) {
     modulePrefix: 'dummy',
     environment,
     rootURL: '/',
-    locationType: 'history',
+    locationType: 'hash',
     EmberENV: {
       EXTEND_PROTOTYPES: false,
       FEATURES: {

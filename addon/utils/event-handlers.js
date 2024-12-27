@@ -9,7 +9,7 @@ export default class EventAdapter {
     if (!element || !this.testCaseGenerator.isRecording) {
       return false;
     }
-    if (notAllowedElements.some((_notAllowedElement) => element.type === _notAllowedElement)) {
+    if (notAllowedElements.includes(element.tagName.toLowerCase())) {
       return false;
     }
     if (allowedElements.length && !element.matches(allowedElements.join(', '))) {

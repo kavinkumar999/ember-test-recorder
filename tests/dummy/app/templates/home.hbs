@@ -1,0 +1,74 @@
+<div class="home-page">
+  <h2>Test Case Recorder</h2>
+
+  <div class="form-test-container">
+    <form {{on "submit" this.onSubmit}} class="test-form">
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input 
+          type="text"
+          id="username"
+          data-test-input="username"
+          value={{this.username}}
+          {{on "input" (fn this.updateField "username")}}
+        />
+      </div>
+      <div class="form-group">
+        <label for="id">Id:</label>
+        <input 
+          type="text"
+          id="id"
+          data-test-input="id"
+          value={{this.id}}
+          {{on "input" (fn this.updateField "id")}}
+        />
+      </div>
+      <div class="form-group">
+        <label for="username">Phone Number:</label>
+        <input 
+          type="number"
+          id="phone-number"
+          data-test-input="phone-number"
+          value={{this.phoneNumber}}
+          {{on "input" (fn this.updateField "phoneNumber")}}
+        />
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input 
+          type="email"
+          id="email"
+          data-test-input="email"
+          value={{this.email}}
+          {{on "input" (fn this.updateField "email")}}
+        />
+      </div>
+
+      <button 
+        type="submit" 
+        data-test-button="submit-form"
+        class="submit-button"
+      >
+        Submit Form
+      </button>
+    </form>
+
+    {{#if this.submitSuccess}}
+      <div class="success-message" data-test-success>
+        Form submitted successfully!
+      </div>
+    {{/if}}
+  </div>
+
+  <div class="example-actions">
+    <h3>Click Examples</h3>
+    <button 
+      type="button" 
+      class="example-button"
+      data-test-button="counter"
+      {{on "click" (fn (mut this.clickCount) (add this.clickCount 1))}}
+    >
+      Click me! ({{or this.clickCount 0}} clicks)
+    </button>
+  </div>
+</div> 
