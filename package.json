@@ -27,7 +27,6 @@
     "start": "ember serve",
     "test": "concurrently \"npm:lint\" \"npm:test:*\" --names \"lint,test:\"",
     "test:ember": "ember test",
-    "deploy": "gh-pages -d dist",
     "test:ember-compatibility": "ember try:each"
   },
   "dependencies": {
@@ -69,7 +68,6 @@
     "eslint-plugin-n": "^16.6.2",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-qunit": "^8.1.2",
-    "gh-pages": "^6.2.0",
     "loader.js": "^4.7.0",
     "postcss": "^8.4.21",
     "postcss-clean": "^1.2.2",

@@ -33,6 +33,22 @@ Add the test recorder to your application by importing and using the provided co
 4. Click "Stop Recording" when finished
 5. Copy the generated test code to your test file
 
+### Event Configuration
+
+The test recorder provides a flexible event management system that allows you to control which events are tracked during test recording:
+
+1. Click the "Events Config" tab in the sidebar
+2. Toggle individual events on/off:
+   - Click Events - Track mouse clicks on elements
+   - Input Events - Track form input changes
+   - Form Submit - Track form submissions
+   - Navigation - Track route changes
+
+Events can be enabled/disabled at any time, even during recording. This helps you:
+- Focus on specific interactions you want to test
+- Reduce noise in generated test cases
+- Create more targeted and maintainable tests
+
 ### Features
 
 - 🎥 Records user interactions (clicks, form inputs, etc.)
@@ -40,6 +56,7 @@ Add the test recorder to your application by importing and using the provided co
 - 🔄 Converts recorded actions into readable test code
 - 📝 Supports custom assertions through the assertion panel
 - 🎯 Automatically tracks DOM events and route transitions
+- ⚙️ Configurable event tracking system
 
 ### Example Generated Test
 

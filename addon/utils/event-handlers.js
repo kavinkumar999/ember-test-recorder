@@ -1,11 +1,17 @@
 export default class EventAdapter {
-  constructor(testCaseGenerator) {
+  constructor(testCaseGenerator, eventManager) {
     this.testCaseGenerator = testCaseGenerator;
+    this.eventManager = eventManager;
   }
 
   commonHandler(event, options = {}) {
     const element = event.target;
     const { allowedElements = [], notAllowedElements = [] } = options;
+
+    if (!this.eventManager.isEventEnabled(event.type)) {
+      return false;
+    }
+
     if (!element || !this.testCaseGenerator.isRecording) {
       return false;
     }
@@ -118,36 +124,31 @@ export default class EventAdapter {
   }
 
   getSelector(element) {
-    const testAttribute = Array.from(element.attributes).find((attr) => attr.name.startsWith('data-test-'));
+    const directTestAttr = element.attributes && Array.from(element.attributes).find((attr) => attr.name.match(/^data-test-/));
 
-    if (testAttribute) {
-      return `[${testAttribute.name}="${testAttribute.value}"]`;
+    if (directTestAttr) {
+      return `[${directTestAttr.name}="${directTestAttr.value}"]`;
     }
 
-    const testSelectors = new Set(['selector', 'title', 'section', 'action', 'id', 'modal', 'input', 'button']);
-    let closestSelector = null;
-    let minDepth = Infinity;
+    const ancestors = [];
+    let current = element.parentElement;
+    let depth = 1;
 
-    for (const selectorName of testSelectors) {
-      const dataTestAttr = `data-test-${selectorName}`;
-      const matchingElement = element.closest(`[${dataTestAttr}]`);
-
-      if (matchingElement) {
-        let depth = 0;
-        let current = element;
-
-        while (current && current !== matchingElement) {
-          depth++;
-          current = current.parentElement;
-        }
-
-        if (depth < minDepth) {
-          minDepth = depth;
-          closestSelector = `[${dataTestAttr}="${matchingElement.getAttribute(dataTestAttr)}"]`;
-        }
+    while (current) {
+      const testAttr = Array.from(current.attributes).find((attr) => attr.name.match(/^data-test-/));
+      if (testAttr) {
+        ancestors.push({ element: current, attr: testAttr, depth });
       }
+      current = current.parentElement;
+      depth++;
     }
 
-    return closestSelector || false;
+    if (!ancestors.length) {
+      return false;
+    }
+
+    const closest = ancestors.reduce((min, curr) => (curr.depth < min.depth ? curr : min));
+
+    return `[${closest.attr.name}="${closest.attr.value}"]`;
   }
 }

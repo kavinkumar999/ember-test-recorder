@@ -5,9 +5,23 @@ import { inject as service } from '@ember/service';
 
 export default class TestRecorderSidebarComponent extends Component {
   @service testCaseGenerator;
+  @service eventManager;
   @tracked isRecording = false;
   @tracked assertionMode = false;
   @tracked assertionType = 'ok';
+  @tracked activeTab = 'recorder';
+
+  get isRecorderTab() {
+    return this.activeTab === 'recorder';
+  }
+
+  get isEventsTab() {
+    return this.activeTab === 'events';
+  }
+
+  get events() {
+    return this.eventManager.events;
+  }
 
   get testCases() {
     return this.testCaseGenerator.testCaseCode.map((testCase, index) => ({
@@ -63,5 +77,15 @@ export default class TestRecorderSidebarComponent extends Component {
   @action
   removeTest(index) {
     this.testCaseGenerator.removeTestCase(index);
+  }
+
+  @action
+  setActiveTab(tab) {
+    this.activeTab = tab;
+  }
+
+  @action
+  toggleEvent(eventId) {
+    this.eventManager.toggleEvent(eventId);
   }
 }

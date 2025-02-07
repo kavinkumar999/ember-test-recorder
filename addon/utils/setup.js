@@ -1,18 +1,10 @@
 import EventAdapter from './event-handlers';
-
-const TEST_ACTIONS = {
-  CLICK: 'click',
-  INPUT: 'input',
-  FOCUS: 'focus',
-  BLUR: 'blur',
-  KEYUP: 'keyup',
-  SUBMIT: 'submit',
-  POPSTATE: 'popstate'
-};
+import { TEST_ACTIONS } from '../constants/events';
 
 export function setupAllEvents(context, owner) {
   const testCaseGenerator = owner.lookup('service:test-case-generator');
-  const eventAdapter = new EventAdapter(testCaseGenerator);
+  const eventManager = owner.lookup('service:event-manager');
+  const eventAdapter = new EventAdapter(testCaseGenerator, eventManager);
 
   const eventHandlers = {
     [TEST_ACTIONS.CLICK]: (event) => eventAdapter.handleClick(event),
