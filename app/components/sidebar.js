@@ -1,1 +1,1 @@
-export { default } from 'ember-test-recorder/components/sidebar';
+export { default } from 'test-case-generator/components/sidebar';

@@ -3,7 +3,7 @@
 ## Installation
 
 - `git clone <repository-url>`
-- `cd ember-test-recorder`
+- `cd test-case-generator`
 - `npm install`
 
 ## Linting

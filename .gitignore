@@ -9,6 +9,7 @@
 /.env*
 /.pnp*
 /.eslintcache
+/.yarn/
 /coverage/
 /npm-debug.log*
 /testem.log

@@ -1,1 +1,1 @@
-export { default } from 'ember-test-recorder/helpers/html-safe';
+export { default } from 'test-case-generator/helpers/html-safe';

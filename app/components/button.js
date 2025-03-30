@@ -1,1 +1,1 @@
-export { default } from 'ember-test-recorder/components/button';
+export { default } from 'test-case-generator/components/button';

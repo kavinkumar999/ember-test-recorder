@@ -1,1 +1,1 @@
-export { default, eq } from 'ember-test-recorder/helpers/eq';
+export { default, eq } from 'test-case-generator/helpers/eq';

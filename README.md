@@ -1,4 +1,4 @@
-# ember-test-recorder
+# Test Case Generator
 
 An Ember.js addon that helps you create tests by recording user interactions in your application. This tool automatically generates test cases based on your actions, making test creation more intuitive and efficient.
 
@@ -11,7 +11,7 @@ An Ember.js addon that helps you create tests by recording user interactions in 
 ## Installation
 
 ```bash
-ember install ember-test-recorder
+ember install test-case-generator
 ```
 
 ## Usage
