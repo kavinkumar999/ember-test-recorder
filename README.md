@@ -2,6 +2,8 @@
 
 An Ember.js addon that helps you create tests by recording user interactions in your application. This tool automatically generates test cases based on your actions, making test creation more intuitive and efficient.
 
+![Demo](/demo.gif)
+
 ## Compatibility
 
 - Ember.js v4.12 or above
