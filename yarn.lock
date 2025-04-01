@@ -2330,11 +2330,11 @@ __metadata:
   linkType: hard
 
 "@types/node@npm:*, @types/node@npm:>=10.0.0":
-  version: 22.13.14
-  resolution: "@types/node@npm:22.13.14"
+  version: 22.13.15
+  resolution: "@types/node@npm:22.13.15"
   dependencies:
     undici-types: "npm:~6.20.0"
-  checksum: 10c0/fa2ab5b8277bfbcc86c42e46a3ea9871b0d559894cc9d955685d17178c9499f0b1bf03d1d1ea8d92ef2dda818988f4035acb8abf9dc15423a998fa56173ab804
+  checksum: 10c0/a5dd490be73f6e13cac7939dc2bd2de75a5f3532525516cbf5282d7b38c13a6dad5a8ac6a38d3a10a706371467ca11801f88109b34381c77756bdf9ec9b01345
   languageName: node
   linkType: hard
 
@@ -5183,9 +5183,9 @@ __metadata:
   linkType: hard
 
 "electron-to-chromium@npm:^1.5.73":
-  version: 1.5.128
-  resolution: "electron-to-chromium@npm:1.5.128"
-  checksum: 10c0/3c64ec24a8aff8e9954e99366aebdf41c0a5d0e48a498435b68d4deddd938584af53c1b176edd166285cfb9dcd407d4897184208a0369d1bb97e21d8daee8bc2
+  version: 1.5.129
+  resolution: "electron-to-chromium@npm:1.5.129"
+  checksum: 10c0/b497cf5fb53c0b7eb9de39ad529371f934c71eca35091bd36e68874fe02f291c6ef31d5f6c7b0cf13d73911ffea2927276178642a7249684609d17a99af061ff
   languageName: node
   linkType: hard
 
@@ -5860,6 +5860,61 @@ __metadata:
   checksum: 10c0/80d7e1651488feb8c0786d2d9b94de9fb5127af0db58859bed0cb5631350f95de6fb56d29e613ceccc4606aa99b67af6af264b0dea619241ec4ecf98637059c1
   languageName: node
   linkType: hard
+
+"ember-test-recorder@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "ember-test-recorder@workspace:."
+  dependencies:
+    "@babel/core": "npm:^7.25.2"
+    "@babel/eslint-parser": "npm:^7.25.1"
+    "@babel/plugin-proposal-decorators": "npm:^7.24.7"
+    "@ember/optional-features": "npm:^2.1.0"
+    "@ember/test-helpers": "npm:^3.3.1"
+    "@embroider/test-setup": "npm:^4.0.0"
+    "@glimmer/component": "npm:^1.1.2"
+    "@glimmer/tracking": "npm:^1.1.2"
+    broccoli-asset-rev: "npm:^3.0.0"
+    broccoli-funnel: "npm:^3.0.8"
+    broccoli-merge-trees: "npm:^4.2.0"
+    broccoli-postcss: "npm:^6.0.1"
+    concurrently: "npm:^8.2.2"
+    ember-auto-import: "npm:^2.8.1"
+    ember-cli: "npm:~5.12.0"
+    ember-cli-babel: "npm:^8.2.0"
+    ember-cli-clean-css: "npm:^3.0.0"
+    ember-cli-dependency-checker: "npm:^3.3.2"
+    ember-cli-htmlbars: "npm:^6.3.0"
+    ember-cli-inject-live-reload: "npm:^2.1.0"
+    ember-cli-sri: "npm:^2.1.1"
+    ember-cli-terser: "npm:^4.0.2"
+    ember-load-initializers: "npm:^2.1.2"
+    ember-page-title: "npm:^8.2.3"
+    ember-qunit: "npm:^8.1.0"
+    ember-resolver: "npm:^12.0.1"
+    ember-source: "npm:~5.12.0"
+    ember-source-channel-url: "npm:^3.0.0"
+    ember-template-lint: "npm:^6.0.0"
+    ember-try: "npm:^3.0.0"
+    eslint: "npm:^8.57.1"
+    eslint-config-prettier: "npm:^9.1.0"
+    eslint-plugin-ember: "npm:^12.2.1"
+    eslint-plugin-n: "npm:^16.6.2"
+    eslint-plugin-prettier: "npm:^5.2.1"
+    eslint-plugin-qunit: "npm:^8.1.2"
+    loader.js: "npm:^4.7.0"
+    postcss: "npm:^8.4.21"
+    postcss-clean: "npm:^1.2.2"
+    prettier: "npm:^3.3.3"
+    qunit: "npm:^2.22.0"
+    qunit-dom: "npm:^3.2.1"
+    stylelint: "npm:^15.11.0"
+    stylelint-config-standard: "npm:^34.0.0"
+    stylelint-prettier: "npm:^4.1.0"
+    webpack: "npm:^5.95.0"
+  peerDependencies:
+    ember-source: ">= 4.0.0"
+  languageName: unknown
+  linkType: soft
 
 "ember-try-config@npm:^4.0.0":
   version: 4.0.0
@@ -12701,61 +12756,6 @@ __metadata:
   checksum: 10c0/83326545ea1aecd6261030568b6191ccfa4cb6aa61d9ea41746a52479f50017a78b77e4725fbbc207c5df841ffa66a773c5ac33636e95c7ab94fe7e0379ae5c7
   languageName: node
   linkType: hard
-
-"test-case-generator@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "test-case-generator@workspace:."
-  dependencies:
-    "@babel/core": "npm:^7.25.2"
-    "@babel/eslint-parser": "npm:^7.25.1"
-    "@babel/plugin-proposal-decorators": "npm:^7.24.7"
-    "@ember/optional-features": "npm:^2.1.0"
-    "@ember/test-helpers": "npm:^3.3.1"
-    "@embroider/test-setup": "npm:^4.0.0"
-    "@glimmer/component": "npm:^1.1.2"
-    "@glimmer/tracking": "npm:^1.1.2"
-    broccoli-asset-rev: "npm:^3.0.0"
-    broccoli-funnel: "npm:^3.0.8"
-    broccoli-merge-trees: "npm:^4.2.0"
-    broccoli-postcss: "npm:^6.0.1"
-    concurrently: "npm:^8.2.2"
-    ember-auto-import: "npm:^2.8.1"
-    ember-cli: "npm:~5.12.0"
-    ember-cli-babel: "npm:^8.2.0"
-    ember-cli-clean-css: "npm:^3.0.0"
-    ember-cli-dependency-checker: "npm:^3.3.2"
-    ember-cli-htmlbars: "npm:^6.3.0"
-    ember-cli-inject-live-reload: "npm:^2.1.0"
-    ember-cli-sri: "npm:^2.1.1"
-    ember-cli-terser: "npm:^4.0.2"
-    ember-load-initializers: "npm:^2.1.2"
-    ember-page-title: "npm:^8.2.3"
-    ember-qunit: "npm:^8.1.0"
-    ember-resolver: "npm:^12.0.1"
-    ember-source: "npm:~5.12.0"
-    ember-source-channel-url: "npm:^3.0.0"
-    ember-template-lint: "npm:^6.0.0"
-    ember-try: "npm:^3.0.0"
-    eslint: "npm:^8.57.1"
-    eslint-config-prettier: "npm:^9.1.0"
-    eslint-plugin-ember: "npm:^12.2.1"
-    eslint-plugin-n: "npm:^16.6.2"
-    eslint-plugin-prettier: "npm:^5.2.1"
-    eslint-plugin-qunit: "npm:^8.1.2"
-    loader.js: "npm:^4.7.0"
-    postcss: "npm:^8.4.21"
-    postcss-clean: "npm:^1.2.2"
-    prettier: "npm:^3.3.3"
-    qunit: "npm:^2.22.0"
-    qunit-dom: "npm:^3.2.1"
-    stylelint: "npm:^15.11.0"
-    stylelint-config-standard: "npm:^34.0.0"
-    stylelint-prettier: "npm:^4.1.0"
-    webpack: "npm:^5.95.0"
-  peerDependencies:
-    ember-source: ">= 4.0.0"
-  languageName: unknown
-  linkType: soft
 
 "testem@npm:^3.15.1":
   version: 3.15.2

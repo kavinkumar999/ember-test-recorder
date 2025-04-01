@@ -1,1 +1,1 @@
-export { default } from 'test-case-generator/services/event-manager';
+export { default } from 'ember-test-recorder/services/event-manager';

@@ -1,12 +1,13 @@
 {
-  "name": "test-case-generator",
-  "version": "0.1.0",
+  "name": "ember-test-recorder",
+  "version": "0.0.1",
   "description": "An Ember addon for recording and generating acceptance test cases through UI interactions",
   "keywords": [
     "ember-addon",
     "testing",
     "test-recorder",
     "acceptance-tests",
+    "test-case-generator",
     "ember-testing"
   ],
   "repository": "",
